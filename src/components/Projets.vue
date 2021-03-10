@@ -7,77 +7,29 @@
           tout se trouve ici.</p>
       </header>
 
-
-      <h3 class="titre">Développement web</h3>
+      <div class="filtre">
+      <button
+        v-for="(entry, index) in filterList"
+        :item="entry"
+        :key="index"
+        @click="filter = entry;"
+        :class="{ active: entry == filter }"
+      >
+        {{ entry }}
+      </button>
+      </div>
 
       <div class="place">
-        <div class="carte">
-          <div class="imageprojet"><img src="../assets/img/eperischool.jpg" alt=""></div>
+        <div class="carte" v-for="(entry) in listeProjets"
+             v-if="entry[fkey] === filter || filter === 'Tout les projets'"
+             :item="entry">
+          <div class="imageprojet"><img :src="entry.img" alt=""></div>
           <div class="infos">
             <div class="content">
-              <h3>E.peri&School<br></h3>
+              <h3>{{entry.nom}}<br></h3>
               <span class="spandetail">
-                        Site récemment mis en ligne pour le programme d’intervention en milieu scolaire.
-                        Création d'une application web de calendrier pour intervenants.
-                    </span><br>
-              <router-link to="/Details" class="lienprojet">
-                Details
-              </router-link>
-            </div>
-          </div>
-        </div>
-        <div class="carte">
-          <div class="imageprojet"><img src="../assets/img/appandroid.jpg" alt=""></div>
-          <div class="infos">
-            <div class="content">
-              <h3>Application Mobile<br></h3>
-              <span class="spandetail">
-                    Application Mobile de géolocalisation ayant pour but d'utiliser l'Open Data de SNCF pour situer les
-                    différentes gares sur une carte.
-                </span><br>
-              <router-link to="/Details" class="lienprojet">
-                Details
-              </router-link>
-            </div>
-          </div>
-        </div>
-        <div class="carte">
-          <div class="imageprojet"><img src="../assets/img/mobilefirst.jpg" alt=""></div>
-          <div class="infos">
-            <div class="content">
-              <h3>Mobile First<br></h3>
-              <span class="spandetail">
-                    Création d'un site web en mobile first dans le thème des super-héros ainsi que de l'écologie.
-                </span><br>
-              <router-link to="/Details" class="lienprojet">
-                Details
-              </router-link>
-            </div>
-          </div>
-        </div>
-        <div class="carte">
-          <div class="imageprojet"><img src="../assets/img/landingpage.jpg" alt=""></div>
-          <div class="infos">
-            <div class="content">
-              <h3>Landing Page<br></h3>
-              <span class="spandetail">
-                        Création d'une Landing Page dans le cadre d'un projet de géolocalisation de zones
-                        pour faire du skate.
-                </span><br>
-              <router-link to="/Details" class="lienprojet">
-                Details
-              </router-link>
-            </div>
-          </div>
-        </div>
-        <div class="carte">
-          <div class="imageprojet"><img src="../assets/img/maquette.jpg" alt=""></div>
-          <div class="infos">
-            <div class="content">
-              <h3>Maquette Wordpress<br></h3>
-              <span class="spandetail">
-                        Intégration d'une maquette en tant que thème sur Wordpress.
-                </span><br>
+                  {{entry.description}}
+              </span><br>
               <router-link to="/Details" class="lienprojet">
                 Details
               </router-link>
@@ -87,46 +39,60 @@
       </div>
 
 
-      <h3 class="titre">Modélisation 3D et OpenGL</h3>
 
-      <div class="place">
-        <div class="carte">
-          <div class="imageprojet"><img src="../assets/img/chambre.jpg" alt=""></div>
-          <div class="infos">
-            <div class="content">
-              <h3>Chambre 3D<br></h3>
-              <span class="spandetail">
-                        Modélisation d'une chambre en 3D contenant différents objets ainsi que quelques lumières.
-                </span><br>
-              <router-link to="/Details" class="lienprojet">
-                Details
-              </router-link>
-            </div>
-          </div>
-        </div>
-        <div class="carte">
-          <div class="imageprojet"><img src="../assets/img/opengl.jpg" alt=""></div>
-          <div class="infos">
-            <div class="content">
-              <h3>Chambre 3D sur une page web<br></h3>
-              <span class="spandetail">
-                    Utilisation de la chambre 3D afin de l'utiliser dans un site web. </span>
-              <router-link to="/Details" class="lienprojet">
-                Details
-              </router-link>
-            </div>
-          </div>
-        </div>
-      </div>
+
+
     </div>
 </template>
 <script>
+import axios from "axios"
 export default {
-  name: 'Projets',
+  name: 'App',
+  data () {
+    return {
+      fkey: "type",
+      filterList: ["Developpement", "Design", "3D","Tout les projets"],
+      filter: "All",
+      listeProjets : []
+    }
+  },
+  created(){
+
+    axios.get('static/Projets.json')
+      .then(function (response) {
+
+        console.log(response.data);
+        this.listeProjets = response.data;
+
+      }.bind(this))
+      .catch(function (error) {
+        //erreur//
+        console.log(error);
+      })
+  },
 }
 </script>
 <style>
-
+.filtre {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 100px;
+}
+.filtre > button {
+  padding: 15px;
+  margin: 25px;
+  width: 150px;
+  height: 60px;
+  font-family: "AkayaKanadaka", sans-serif;
+  font-size: 1em;
+  border: none;
+  border-radius: 25px;
+  background-color: #2d3436;
+  color: #dfe6e9;
+  cursor: pointer;
+}
 .anim {
   color: #2d3436;
   font-family: "AkayaKanadaka", sans-serif;
@@ -150,16 +116,17 @@ header p {
   width: 100%;
   display: flex;
   justify-content: center;
-  align-content: center;
+
   flex-direction: row;
   flex-wrap: wrap;
 }
 .carte {
   margin: 2%;
-  width: 800px;
-  height: 560px;
+  width: 400px;
+  height: 260px;
   background: #262626;
   position: relative;
+  transition: .5s;
 }
 .carte .imageprojet {
   width: 100%;
@@ -200,11 +167,11 @@ header p {
   text-transform: uppercase;
   font-family: "AkayaKanadaka", sans-serif;
   color: #dfe6e9;
-  font-size: 3em;
-  margin-bottom: 50px;
+  font-size: 1.5em;
+  margin-bottom: 25px;
 }
 .spandetail {
-  font-size: 18px;
+  font-size: 14px;
   color: #dfe6e9;
   font-family: "TitilliumWeb", sans-serif;
   width: 50%;
@@ -212,7 +179,7 @@ header p {
 }
 .lienprojet {
   font-family: "TitilliumWeb", sans-serif;
-  font-size: 1.8em;
+  font-size: 1.2em;
   text-decoration: none;
   color: #2d3436;
   background-color: #dfe6e9;
@@ -220,8 +187,8 @@ header p {
   border-radius: 25px;
   text-align: center;
   position: absolute;
-  bottom: 0;
-  left: 40%;
+  bottom: -30px;
+  left: 35%;
   transition: .5s;
 }
 .lienprojet:hover {
@@ -240,6 +207,27 @@ header > p {
 }
 
 @media screen and (max-width:830px) {
+  .filtre {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 100px;
+  }
+  .filtre > button {
+    padding: 10px;
+    margin: 25px;
+    width: 150px;
+    height: 60px;
+    font-family: "AkayaKanadaka", sans-serif;
+    font-size: 16px;
+    border: none;
+    border-radius: 25px;
+    background-color: #2d3436;
+    color: #dfe6e9;
+    cursor: pointer;
+  }
   .anim {
     color: #2d3436;
     font-family: "AkayaKanadaka", sans-serif;
