@@ -1,0 +1,44 @@
+[
+  {
+    "type"            : "Developpement",
+    "nom"             : "E.peri&School",
+    "description"     : "Site récemment mis en ligne pour le programme d’intervention en milieu scolaire. Création d'une application web de calendrier pour intervenants.",
+    "img"             : "https://armandomanzoli.fr/img/eperischool.jpg"
+  },
+  {
+    "type"            : "Developpement",
+    "nom"             : "Application Mobile",
+    "description"     : " Application Mobile de géolocalisation ayant pour but d'utiliser l'Open Data de SNCF pour situer les différentes gares sur une carte.",
+    "img"             : "https://armandomanzoli.fr/img/appandroid.jpg"
+  },
+  {
+    "type"            : "Developpement",
+    "nom"             : "Mobile First",
+    "description"     : "Création d'un site web en mobile first dans le thème des super-héros ainsi que de l'écologie.",
+    "img"             : "https://armandomanzoli.fr/img/mobilefirst.jpg"
+  },
+  {
+    "type"            : "Design",
+    "nom"             : "Landing Page",
+    "description"     : "Création d'une Landing Page dans le cadre d'un projet de géolocalisation de zones pour faire du skate.",
+    "img"             : "https://armandomanzoli.fr/img/landingpage.jpg"
+  },
+  {
+    "type"            : "Design",
+    "nom"             : "Maquette Wordpress",
+    "description"     : "Intégration d'une maquette en tant que thème sur Wordpress.",
+    "img"             : "https://armandomanzoli.fr/img/maquette.jpg"
+  },
+  {
+    "type"            : "3D",
+    "nom"             : "Chambre 3D",
+    "description"     : "Modélisation d'une chambre en 3D contenant différents objets ainsi que quelques lumières.",
+    "img"             : "https://armandomanzoli.fr/img/chambre.jpg"
+  },
+  {
+    "type"            : "3D",
+    "nom"             : "Chambre 3D sur une page web",
+    "description"     : "Utilisation de la chambre 3D afin de l'utiliser dans un site web.",
+    "img"             : "https://armandomanzoli.fr/img/opengl.jpg"
+  }
+]
